@@ -44,6 +44,7 @@ Estos son algunos de los casos que se pueden simular cambiando las condiciones i
 ![Gráficas tiro oblicuo](graficas/tiro_oblicuo.png)
 
 ### Caso `giro_rapido` (el cable gira a 8 rad/s)
+Este es un caso límite
 
 ![Animación giro rápido](animaciones/giro_rapido.gif)
 ![Gráficas giro rápido](graficas/giro_rapido.png)
