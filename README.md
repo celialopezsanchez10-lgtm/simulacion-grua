@@ -1,8 +1,8 @@
 # Pluma de grúa en caída libre con gancho
 
-Simulación numérica para la asignatura Mecánica y Ondas I (Grado en Física, Universidad de Córdoba).
+Simulación numérica para la asignatura Mecánica y Ondas I.
 
-Una pluma de grúa homogénea y rígida (masa `M`, longitud `L`) se desprende de la torre y cae en un plano vertical. Del punto medio de la pluma cuelga un gancho (masa `m`) con un cable inextensible de longitud `l`. El planteamiento del problema, el modelo y su resolución analítica están en el informe que acompaña a este código: [informe.pdf](informe.pdf).
+Una pluma de grúa homogénea y rígida (masa `M`, longitud `L`) se desprende de la barra lateral y cae en un plano vertical. Del punto medio de la pluma cuelga un gancho (masa `m`) con un cable inextensible de longitud `l`. El planteamiento del problema, el modelo y su resolución analítica están en el informe que acompaña a este código.
 
 ![Animación](animacion.gif)
 
