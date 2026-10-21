@@ -33,9 +33,8 @@ import matplotlib.pyplot as plt
 from matplotlib.animation import FuncAnimation, PillowWriter
 from matplotlib.patches import Rectangle
 
-# ---------------------------------------------------------------------------
 # 1. PARÁMETROS DEL SISTEMA (valores base; cada caso puede cambiar alguno)
-# ---------------------------------------------------------------------------
+
 PARAMS_BASE = dict(
     M=500.0,   # masa de la pluma [kg]
     m=100.0,   # masa del gancho [kg]
@@ -45,14 +44,13 @@ PARAMS_BASE = dict(
     g=9.81,    # gravedad [m/s^2]
 )
 
-# ---------------------------------------------------------------------------
 # 2. CONDICIONES INICIALES Y CASOS
 #    CI_BASE son las condiciones iniciales por defecto. Cada caso indica solo
 #    lo que cambia:
 #       ci     -> condiciones iniciales distintas de CI_BASE
 #       params -> parámetros distintos de PARAMS_BASE
 #    Para añadir un caso nuevo, copia una entrada y cambia lo que quieras.
-# ---------------------------------------------------------------------------
+
 CI_BASE = dict(phi0=np.radians(20), dphi0=0.0, dalpha0=0.0, vx0=0.0, vy0=0.0)
 
 # Condiciones iniciales del caso "giro" (se reutilizan al variar los parámetros)
@@ -121,7 +119,6 @@ def completar(caso):
     return ci, P
 
 
-# ---------------------------------------------------------------------------
 # 3. ECUACIONES DE MOVIMIENTO (Euler-Lagrange)
 #    Estado s = [x, y, alpha, phi, xd, yd, alphad, phid]
 #    Las ecuaciones de x, y, phi forman un sistema lineal en las aceleraciones:
@@ -129,7 +126,7 @@ def completar(caso):
 #      (M+m) ydd + m l sin(phi) phidd = -(M+m) g - m l phid^2 cos(phi)
 #      cos(phi) xdd + sin(phi) ydd + l phidd = -g sin(phi)
 #    y la de alpha es: alphadd = 0
-# ---------------------------------------------------------------------------
+
 def aceleraciones(s, P):
     M, m, l, g = P["M"], P["m"], P["l"], P["g"]
     phi, dphi = s[3], s[7]
@@ -165,9 +162,8 @@ def simular(ci, P):
                      rtol=1e-10, atol=1e-12, dense_output=True)
 
 
-# ---------------------------------------------------------------------------
 # 4. MAGNITUDES DERIVADAS Y COMPROBACIONES
-# ---------------------------------------------------------------------------
+
 def constantes(s, P):
     """Devuelve p_x, p_alpha y la energía E para cada instante (s: array 8 x N)."""
     M, m, L, l, g = P["M"], P["m"], P["L"], P["l"], P["g"]
@@ -236,9 +232,8 @@ def analizar(sol, P):
     )
 
 
-# ---------------------------------------------------------------------------
 # 5. GRÁFICAS
-# ---------------------------------------------------------------------------
+
 def paneles_basicos(ax0, ax1, ax2, t, s, P):
     """Las tres primeras gráficas: centro de masas, ángulos y trayectorias."""
     ext1, ext2, gancho = posiciones(s, P)
@@ -305,9 +300,8 @@ def graficas_completas(sol, P, fichero="resultados.png"):
     return fig
 
 
-# ---------------------------------------------------------------------------
 # 6. ANIMACIÓN (con la torre de la grúa)
-# ---------------------------------------------------------------------------
+
 def animar(sol, P, nombre, fichero, fps=30):
     L, H = P["L"], P["H"]
     n = max(2, int(sol.t[-1] * fps))
@@ -367,9 +361,8 @@ def animar(sol, P, nombre, fichero, fps=30):
     return fig
 
 
-# ---------------------------------------------------------------------------
 # 7. PROGRAMA PRINCIPAL
-# ---------------------------------------------------------------------------
+
 if __name__ == "__main__":
     os.makedirs("animaciones", exist_ok=True)
     os.makedirs("graficas", exist_ok=True)
